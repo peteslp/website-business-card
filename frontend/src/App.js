@@ -103,6 +103,13 @@ function App() {
 
       {/* Hero Section */}
       <section id="hero" className="hero-section">
+        <div className="particles">
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+        </div>
         <div className="hero-overlay" style={{ opacity: Math.max(0.8, 1 - scrollY / 1000) }}></div>
         <div className="hero-content" style={{ transform: `translateY(${scrollY * 0.3}px)` }}>
           <div className={`transform transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
@@ -120,7 +127,7 @@ function App() {
             <p className="hero-description">Speech-Language Pathologist</p>
             <div className="hero-stats">
               <div className="stat-item pulse-animation">
-                <span className="stat-number">25+</span>
+                <span className="stat-number counter" data-target="25">0</span><span className="stat-number">+</span>
                 <span className="stat-label">Years Experience</span>
               </div>
               <div className="stat-divider"></div>
@@ -133,7 +140,10 @@ function App() {
               onClick={() => scrollToSection('contact')} 
               className="cta-button pulse-button"
             >
-              Get In Touch
+              <span>Get In Touch</span>
+              <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </button>
           </div>
         </div>
