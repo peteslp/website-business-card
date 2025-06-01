@@ -103,33 +103,35 @@ function App() {
 
       {/* Hero Section */}
       <section id="hero" className="hero-section">
-        <div className="hero-overlay"></div>
-        <div className="hero-content">
+        <div className="hero-overlay" style={{ opacity: Math.max(0.8, 1 - scrollY / 1000) }}></div>
+        <div className="hero-content" style={{ transform: `translateY(${scrollY * 0.3}px)` }}>
           <div className={`transform transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <div className="profile-image-container">
-              <div className="profile-image">
+              <div className="profile-image floating">
                 <div className="profile-placeholder">
                   <span className="text-4xl font-bold text-gray-600">PO</span>
                 </div>
+                <div className="profile-ring"></div>
+                <div className="profile-ring-2"></div>
               </div>
             </div>
-            <h1 className="hero-title">Pete O'Rourke</h1>
+            <h1 className="hero-title typewriter">Pete O'Rourke</h1>
             <h2 className="hero-subtitle">M.S., CCC-SLP</h2>
             <p className="hero-description">Speech-Language Pathologist</p>
             <div className="hero-stats">
-              <div className="stat-item">
+              <div className="stat-item pulse-animation">
                 <span className="stat-number">25+</span>
                 <span className="stat-label">Years Experience</span>
               </div>
               <div className="stat-divider"></div>
-              <div className="stat-item">
+              <div className="stat-item pulse-animation">
                 <span className="stat-number">Simply SLPs</span>
                 <span className="stat-label">LLC Owner</span>
               </div>
             </div>
             <button 
               onClick={() => scrollToSection('contact')} 
-              className="cta-button"
+              className="cta-button pulse-button"
             >
               Get In Touch
             </button>
