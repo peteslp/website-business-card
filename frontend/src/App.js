@@ -181,7 +181,11 @@ function App() {
           </div>
           <div className="space-y-8">
             {experiences.map((exp, index) => (
-              <div key={index} className="experience-card">
+              <div 
+                key={index} 
+                data-index={index}
+                className={`experience-card ${visibleExperiences.includes(index) ? 'animate-in' : ''}`}
+              >
                 <div className="experience-timeline"></div>
                 <div className="experience-content">
                   <h3 className="experience-title">{exp.title}</h3>
