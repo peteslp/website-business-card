@@ -31,8 +31,26 @@ function App() {
       return () => observer.disconnect();
     };
 
+    // Counter animation
+    const animateCounters = () => {
+      const counters = document.querySelectorAll('.counter');
+      counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        let count = 0;
+        const updateCounter = () => {
+          if (count < target) {
+            count++;
+            counter.textContent = count;
+            setTimeout(updateCounter, 50);
+          }
+        };
+        setTimeout(updateCounter, 1000); // Start after 1 second delay
+      });
+    };
+
     window.addEventListener('scroll', handleScroll);
     const cleanup = observeExperiences();
+    animateCounters();
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
