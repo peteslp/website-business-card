@@ -6,9 +6,38 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const [scrollY, setScrollY] = useState(0);
+  const [visibleExperiences, setVisibleExperiences] = useState([]);
 
   useEffect(() => {
     setIsLoaded(true);
+    
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    const observeExperiences = () => {
+      const experienceElements = document.querySelectorAll('.experience-card');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.dataset.index);
+            setVisibleExperiences(prev => [...new Set([...prev, index])]);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      experienceElements.forEach((el) => observer.observe(el));
+      return () => observer.disconnect();
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    const cleanup = observeExperiences();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      cleanup();
+    };
   }, []);
 
   const scrollToSection = (sectionId) => {
